@@ -463,9 +463,9 @@ class DigitalController(Scene):
         
         self.startup()
 
-        self.find_gz()
+        # self.find_gz()
 
-        self.new_system()
+        # self.new_system()
 
         self.wait()
 
@@ -569,13 +569,16 @@ class DigitalController(Scene):
 
         self.play(Write(digital_computer), Write(text))
 
+        self.play(digital_computer.animate.set_fill(BLUE, opacity=1),text.animate.move_to(digital_computer.get_center()), run_time=2)
+
         text2 = Tex("What Digital Computer Sees is").move_to(DOWN).set_color(RED)
         self.play(Write(text2))
 
         text.add_updater(lambda m: m.move_to(digital_computer.get_center()))
-        self.play(text.animate.move_to(digital_computer.get_center()),text2.animate.move_to(UP*3.5),digital_group.animate.shift(DOWN*2.5), run_time=2)
+        self.play(text2.animate.move_to(UP*3.5),digital_group.animate.shift(DOWN*2.5), run_time=2)
 
-        self.remove(digital_rt,digital_controller,digital_controller_tf,plus_group,arrow1,arrow2,line3,minus_sign,arrow_head,line4,arrow3)
+        # self.remove(digital_rt,digital_controller,digital_controller_tf,plus_group,arrow1,arrow2,line3,minus_sign,arrow_head,line4,arrow3) fade out all these
+        self.play(FadeOut(digital_rt),FadeOut(digital_controller),FadeOut(digital_controller_tf),FadeOut(plus_group),FadeOut(arrow1),FadeOut(arrow2),FadeOut(line3),FadeOut(minus_sign),FadeOut(arrow_head),FadeOut(line4),FadeOut(arrow3), run_time=1)
 
         new_arrow = Arrow(DAC_group.get_left()+LEFT, DAC_group.get_left()+RIGHT*0.3, stroke_color = WHITE)
 
