@@ -1,0 +1,2 @@
+# do not upload files in media
+/media/*
