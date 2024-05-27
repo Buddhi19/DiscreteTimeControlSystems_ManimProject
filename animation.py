@@ -560,7 +560,7 @@ class DigitalController(Scene):
 
         self.play(digital_group.animate.shift(UP*3),FadeOut(title), run_time=2)
 
-        digital_computer = Rectangle(width=6, height=3.2, color = RED).move_to(LEFT*4+UP*2.2)
+        digital_computer = Rectangle(width=5.5, height=3.2, color = RED).move_to(LEFT*4.5+UP*2.2).scale(0.95)
         digital_computer.set_fill(BLUE, opacity=0.5)
 
         digital_group.add(digital_computer)
@@ -578,13 +578,8 @@ class DigitalController(Scene):
         self.play(text2.animate.move_to(UP*3.5),digital_group.animate.shift(DOWN*2.5), run_time=2)
 
         # self.remove(digital_rt,digital_controller,digital_controller_tf,plus_group,arrow1,arrow2,line3,minus_sign,arrow_head,line4,arrow3) fade out all these
-        self.play(FadeOut(digital_rt),FadeOut(digital_controller),FadeOut(digital_controller_tf),FadeOut(plus_group),FadeOut(arrow1),FadeOut(arrow2),FadeOut(line3),FadeOut(minus_sign),FadeOut(arrow_head),FadeOut(line4),FadeOut(arrow3), run_time=1)
-
-        new_arrow = Arrow(DAC_group.get_left()+LEFT, DAC_group.get_left()+RIGHT*0.3, stroke_color = WHITE)
-
-        new_arrow2 = Arrow(ADC_group.get_left()+RIGHT*0.3, ADC_group.get_left()+LEFT, stroke_color = WHITE)
-        
-        self.play(Create(new_arrow),Create(new_arrow2))
+        self.play(FadeOut(digital_rt),FadeOut(digital_controller),FadeOut(digital_controller_tf),FadeOut(plus_group),FadeOut(arrow1),FadeOut(arrow2),
+                  FadeOut(line3),FadeOut(minus_sign), run_time=1)
 
         discrete_analog_sys = Rectangle(width=7.5, height=4, stroke_color = BLUE).move_to(RIGHT*2.75+DOWN*0.3)
         discrete_analog_sys.set_fill(RED, opacity=0.5)
@@ -597,8 +592,9 @@ class DigitalController(Scene):
         self.wait(2)
 
         #fadeout everything
-        self.play(FadeOut(digital_group),FadeOut(text),FadeOut(new_arrow),FadeOut(new_arrow2),FadeOut(ADC_group),FadeOut(ADC_group),FadeOut(DAC_group),FadeOut(discrete_analog_sys),
-                  FadeOut(text3),FadeOut(text2),run_time = 0.1)
+        self.play(FadeOut(text),FadeOut(ADC_group),FadeOut(ADC_group),FadeOut(DAC_group),FadeOut(discrete_analog_sys),
+                  FadeOut(arrow4),FadeOut(arrow5),FadeOut(feedback_arrow),FadeOut(analog_system),FadeOut(analog_tf),FadeOut(output),FadeOut(digital_computer),
+                  FadeOut(text3),FadeOut(text2),run_time = 2)
 
         discrete_input = MathTex(r"u_d(t)").move_to(LEFT*6)
         DAC_group.move_to(LEFT*3)
