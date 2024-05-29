@@ -256,7 +256,7 @@ class Controller(Scene):
     def out_graph2(self):
         axes = Axes(
             x_range=[-1, 6, 1],
-            y_range=[-1, 2, 1],
+            y_range=[-1, 5, 1],
             axis_config={"include_numbers": True}
         ).scale(0.6).move_to(DOWN*2)
 
@@ -265,7 +265,7 @@ class Controller(Scene):
         def output_function(x):
             if x < 0:
                 return 0
-            return (12*np.exp(-7*x))/7 - 2*np.exp(-6*x) + 2/7
+            return 12*((12*np.exp(-7*x))/7 - 2*np.exp(-6*x) + 2/7)
         
         output_graph = axes.plot(output_function, color=RED)
         self.play(Create(axes), Write(labels))

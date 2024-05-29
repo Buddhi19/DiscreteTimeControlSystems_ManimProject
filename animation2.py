@@ -1,7 +1,8 @@
 from manim import *
 import numpy as np
+from scipy.signal import residue, dimpulse, dlti
 
-class Controller2(Scene):
+class Controller2_add_part(Scene):
     def construct(self):
 
         self.create_system_representation_again()
@@ -192,6 +193,27 @@ class Controller2(Scene):
         self.wait(2)
 
         self.play(FadeOut(axes),FadeOut(axes_labels),FadeOut(stems),FadeOut(dots),FadeOut(z_transform))
+
+        #define Gz
+        Gz = MathTex(r"G(z) = \frac{\mathcal{Z}\{y_d(t)\}}{\mathcal{Z}\{u_d(t)\}}").set_color(BLUE).shift(DOWN*0.5)
+        self.play(Write(Gz))
+
+        self.wait(1)
+
+        Gz2 = MathTex(r"G(z) = \frac{Y_d(z)}{U_d(z)}").set_color(BLUE).shift(DOWN*0.5)
+
+        self.play(Transform(Gz,Gz2))
+
+        self.wait(1)
+
+        #if udt is a impulse function
+        text = Tex("If $u_d(t)$ is an impulse function").move_to(DOWN*2).set_color(YELLOW).scale(0.8)
+        self.play(Write(text))
+
+        Gz3 = MathTex(r"G(z) = \frac{Y(z)}{1}").set_color(BLUE).shift(DOWN*0.5)
+        self.play(Transform(Gz,Gz3))
+
+        self.play(FadeOut(Gz),FadeOut(text))
         
         text1 = MathTex(r"\text{G(z) is the Z-Transformation of the}\\ \text{impulse response of the system}").move_to(DOWN*0.5).set_color(BLUE)
         self.play(Write(text1))
@@ -199,6 +221,7 @@ class Controller2(Scene):
         self.wait(2)
         self.play(FadeOut(text1))
 
+    def new(self):
         axes = Axes(
             x_range=[-1, 6, 1],
             y_range=[-1, 2, 1],
@@ -377,7 +400,15 @@ class Controller2(Scene):
 
         self.wait(1)
 
-        self.play(FadeOut(yt7),FadeOut(text7),FadeOut(yt8),FadeOut(out2),FadeOut(group1))
+        self.play(FadeOut(yt7),FadeOut(text7),FadeOut(yt8),FadeOut(out2))
+
+        #add image
+        image = ImageMobject("image.png").move_to(DOWN*1.5).scale(1.5).set_z_index(-1)
+        self.play(FadeIn(image))
+
+        self.wait(2)
+
+        self.play(FadeOut(image),FadeOut(group1))
 
         self.play(group24.animate.shift(DOWN*2))
 
